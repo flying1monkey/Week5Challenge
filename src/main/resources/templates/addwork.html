@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--header css declarations-->
+    <th:block th:replace="base :: headstart"/>
+    <title>Resume Generator</title>
+
+</head>
+<body>
+<!--Navigation bar-->
+<div th:replace="base :: mynav"></div>
+
+<div class="container" >
+    <form action="#" th:action="@{/addwork}" th:object="${addjob}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="row justify-content-center">
+            <div class="col col-sm-4 form-group">
+                <label for="co">Company</label>
+                <input type="text" class="form-control" th:field="*{company}" id="co" placeholder="Company"/>
+                <span th:if="${#fields.hasErrors('company')}" th:errors="*{company}"/>
+            </div>
+            <div class="col col-sm-4 form-group">
+                <label for="jobtitle">Title</label>
+                <input type="text" class="form-control" th:field="*{title}" id="jobtitle" placeholder="Job title"/>
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"/>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-4 form-group">
+                <label for="sdate">Start Date</label>
+                <input type="date" class="form-control" th:field="*{startDate}" id="sdate"/>
+                <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"/>
+            </div>
+            <div class="col col-sm-4 form-group">
+                <label for="edate">End Date</label>
+                <input type="date" class="form-control" th:field="*{endDate}" id="edate"/>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-4 form-group">
+                <label for="duty1">Job Duty</label>
+                <input type="text" class="form-control" th:field="*{firstDuty}" id="duty1" placeholder="First duty"/>
+            </div>
+            <div class="col col-sm-4 form-group">
+                <label for="duty2">Job Duty</label>
+                <input type="text" class="form-control" th:field="*{secondDuty}" id="duty2" placeholder="Second duty"/>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-8">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:replace="base :: jsscripts"></th:block>
+</body>
+</html>

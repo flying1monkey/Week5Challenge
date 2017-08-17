@@ -1,5 +1,7 @@
 package edu.berliner.week4challenge.controllers;
 
+import edu.berliner.week4challenge.models.Education;
+import edu.berliner.week4challenge.models.Job;
 import edu.berliner.week4challenge.models.Person;
 import edu.berliner.week4challenge.repositories.EducationRepo;
 import edu.berliner.week4challenge.repositories.JobRepo;
@@ -27,30 +29,80 @@ public class MainController {
     @Autowired
     SkillRepo skillRepo;
 
+
+    //for blank url, go to home page
     @GetMapping("/")
     public String home()
     {
         return "home";
     }
-
+    //home page
     @GetMapping("/home")
     public String alsoHome()
     {
         return "home";
     }
-
+    //add person page
     @GetMapping("/addperson")
     public String addPerson(Model model)
     {
         model.addAttribute("addperson", new Person());
         return "addperson";
     }
-
+    //for error checking addperson and adding the new person to the database
     @PostMapping("/addperson")
-    public String submitPerson(@Valid @ModelAttribute("person")Person person, BindingResult result)
+    public String submitPerson(@Valid @ModelAttribute("addperson")Person person, BindingResult result)
     {
+        //checks for validation errors
+        if(result.hasErrors())
+        {
+            return "addperson";
+        }
+        //only allow one person in the database
+        person.setId((long) 1);
         personRepo.save(person);
         return "submitperson";
     }
 
+    //add job page
+    @GetMapping("/addwork")
+    public String addJob(Model model)
+    {
+        model.addAttribute("addjob", new Job());
+        return "addwork";
+    }
+
+    //for error checking addwork and adding the new job to the database
+    @PostMapping("/addwork")
+    public String submitWork(@Valid @ModelAttribute("addjob")Job job, BindingResult result)
+    {
+        //checks for validation errors
+        if(result.hasErrors())
+        {
+            return "addwork";
+        }
+        jobRepo.save(job);
+        return "submitwork";
+    }
+
+    //add education page
+    @GetMapping("/addeducation")
+    public String addEducation(Model model)
+    {
+        model.addAttribute("addeducation", new Education());
+        return "addeducation";
+    }
+
+    //for error checking addeducation and adding the new school to the database
+    @PostMapping("/addeducation")
+    public String submitEducation(@Valid @ModelAttribute("addeducation")Education ed, BindingResult result)
+    {
+        //checks for validation errors
+        if(result.hasErrors())
+        {
+            return "addeducation";
+        }
+        edRepo.save(ed);
+        return "submiteducation";
+    }
 }

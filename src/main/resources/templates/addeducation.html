@@ -13,26 +13,25 @@
 
 <!--input-->
 <div class="container">
-    <form action="#" th:action="@{/addperson}" th:object="${addperson}" method="post">
+    <form action="#" th:action="@{/addeducation}" th:object="${addeducation}" method="post">
         <div class="row justify-content-center">
             <div class="col col-sm-4 form-group">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" th:field="*{firstName}" id="firstName"
-                       placeholder="First name"/>
-                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>
+                <label for="school">School</label>
+                <input type="text" class="form-control" th:field="*{schoolName}" id="school" placeholder="College"/>
+                <span th:if="${#fields.hasErrors('schoolName')}" th:errors="*{schoolName}"/>
 
             </div>
             <div class="col col-sm-4 form-group">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Last name"/>
-                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>
+                <label for="degree">Degree</label>
+                <input type="text" class="form-control" th:field="*{degree}" id="degree" placeholder="Bachelor's, Doctorate"/>
+                <span th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}"/>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col col-sm-8 form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="name@example.com"/>
-                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
+                <label for="year">Graduation Year</label>
+                <input type="number" class="form-control" th:field="*{gradYear}" id="year" placeholder="2017"/>
+                <span th:if="${#fields.hasErrors('gradYear')}" th:errors="*{gradYear}"/>
             </div>
         </div>
         <div class="row justify-content-center">
