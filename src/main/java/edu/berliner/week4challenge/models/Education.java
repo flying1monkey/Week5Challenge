@@ -1,6 +1,7 @@
 package edu.berliner.week4challenge.models;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Education {
     private String schoolName;
     @NotEmpty
     private String degree;
-    @NotNull
+    @Range(min=1900, max=2100)
     private int gradYear;
 
     public Long getId() {

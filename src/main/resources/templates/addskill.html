@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--header css declarations-->
+    <th:block th:replace="base :: headstart"/>
+    <title>Resume Generator</title>
+
+</head>
+<body>
+<!--Navigation bar-->
+<div th:replace="base :: mynav"></div>
+
+
+<!--input-->
+<div class="container">
+    <form action="#" th:action="@{/addskill}" th:object="${addskill}" method="post">
+        <div class="row justify-content-center">
+            <div class="col col-sm-4 form-group">
+                <label for="skill">Skill</label>
+                <input type="text" class="form-control" th:field="*{skillName}" id="skill"
+                       placeholder="Juggling"/>
+                <span th:if="${#fields.hasErrors('skillName')}" th:errors="*{skillName}"/>
+
+            </div>
+            <div class="col col-sm-4 form-group">
+                <label for="level">Skill level</label>
+                <input type="text" class="form-control" th:field="*{skillLevel}" id="level" placeholder="Mastery!"/>
+                <span th:if="${#fields.hasErrors('skillLevel')}" th:errors="*{skillLevel}"/>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-8">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:replace="base :: jsscripts"></th:block>
+
+</body>
+</html>

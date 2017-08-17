@@ -3,6 +3,7 @@ package edu.berliner.week4challenge.controllers;
 import edu.berliner.week4challenge.models.Education;
 import edu.berliner.week4challenge.models.Job;
 import edu.berliner.week4challenge.models.Person;
+import edu.berliner.week4challenge.models.Skill;
 import edu.berliner.week4challenge.repositories.EducationRepo;
 import edu.berliner.week4challenge.repositories.JobRepo;
 import edu.berliner.week4challenge.repositories.PersonRepo;
@@ -104,5 +105,32 @@ public class MainController {
         }
         edRepo.save(ed);
         return "submiteducation";
+    }
+
+    //add skill page
+    @GetMapping("/addskill")
+    public String addSkill(Model model)
+    {
+        model.addAttribute("addskill", new Skill());
+        return "addskill";
+    }
+
+    //for error checking addskill and adding the new skill to the database
+    @PostMapping("/addskill")
+    public String submitSkill(@Valid @ModelAttribute("addskill")Skill skill, BindingResult result)
+    {
+        //checks for validation errors
+        if(result.hasErrors())
+        {
+            return "addskill";
+        }
+        skillRepo.save(skill);
+        return "submitskill";
+    }
+
+    @GetMapping("/generate")
+    public String generateResume(Model model)
+    {
+        return "generate";
     }
 }
