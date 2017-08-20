@@ -133,4 +133,14 @@ public class MainController {
     {
         return "generate";
     }
+
+    @GetMapping("/edit")
+    public String editEntry(Model model)
+    {
+        model.addAttribute("person", personRepo.findOne((long)1));
+        model.addAttribute("jobs", jobRepo.findAll());
+        model.addAttribute("education", edRepo.findAll());
+        model.addAttribute("skills", skillRepo.findAll());
+        return "edit";
+    }
 }
