@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--header css declarations-->
+    <th:block th:replace="base :: headstart"/>
+    <title>Resume Generator</title>
+
+</head>
+<body>
+<!--Navigation bar-->
+<div th:replace="base :: mynav"></div>
+
+
+<!--output-->
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col col-sm-4 form-group">
+                <h1>You must enter your name and email first</h1>
+                <p><a href="addperson.html">Add your name and email here.</a></p>
+            </div>
+        </div>
+</div>
+
+
+
+<th:block th:replace="base :: jsscripts"></th:block>
+
+</body>
+</html>

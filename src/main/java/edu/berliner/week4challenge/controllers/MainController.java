@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -51,6 +48,7 @@ public class MainController {
         model.addAttribute("addperson", new Person());
         return "addperson";
     }
+
     //for error checking addperson and adding the new person to the database
     @PostMapping("/addperson")
     public String submitPerson(@Valid @ModelAttribute("addperson")Person person, BindingResult result)
@@ -136,11 +134,18 @@ public class MainController {
     @GetMapping("/generate")
     public String generateResume(Model model)
     {
-        model.addAttribute("person", personRepo.findOne((long)1));
-        model.addAttribute("jobs", jobRepo.findAll());
-        model.addAttribute("education", edRepo.findAll());
-        model.addAttribute("skills", skillRepo.findAll());
-        return "generate";
+        if(!personRepo.findOne((long)1).equals(null))
+        {
+            model.addAttribute("person", personRepo.findOne((long) 1));
+            model.addAttribute("jobs", jobRepo.findAll());
+            model.addAttribute("education", edRepo.findAll());
+            model.addAttribute("skills", skillRepo.findAll());
+            return "generate";
+        }
+        else
+        {
+            return "personerror";
+        }
     }
 
     @GetMapping("/edit")
@@ -153,9 +158,54 @@ public class MainController {
         return "edit";
     }
 
-    @GetMapping("/edit/work/{id}")
-    public String updateCourse(@PathVariable("id") long id, Model model){
-        model.addAttribute("addjob", jobRepo.findOne(id));
-        return "addwork";
+
+    @GetMapping("/edit/{repo}/{id}")
+    public String updateEntry(@PathVariable("repo") String repo, @PathVariable("id") long id, Model model){
+        if(repo.equalsIgnoreCase("person"))
+        {
+            model.addAttribute("addperson", personRepo.findOne(id));
+            return "addperson";
+        }
+        if(repo.equalsIgnoreCase("work"))
+        {
+            model.addAttribute("addjob", jobRepo.findOne(id));
+            return "addwork";
+        }
+        if(repo.equalsIgnoreCase("education"))
+        {
+            model.addAttribute("addeducation", edRepo.findOne(id));
+            return "addeducation";
+        }
+        if(repo.equalsIgnoreCase("skill"))
+        {
+            model.addAttribute("addskill", skillRepo.findOne(id));
+            return "addskill";
+        }
+        System.out.println("You've got a problem");
+        return "edit";
+    }
+
+    @GetMapping("/delete/{repo}/{id}")
+    public String delEntry(@PathVariable("repo") String repo, @PathVariable("id") long id){
+        if(repo.equalsIgnoreCase("person"))
+        {
+            personRepo.delete(id);
+        }
+        else if(repo.equalsIgnoreCase("work"))
+        {
+            jobRepo.delete(id);
+        }
+        else if(repo.equalsIgnoreCase("education"))
+        {
+            edRepo.delete(id);
+        }
+        else if(repo.equalsIgnoreCase("skill"))
+        {
+            skillRepo.delete(id);
+        }
+        else {
+            System.out.println("You've got a problem");
+        }
+        return "redirect:/edit";
     }
 }

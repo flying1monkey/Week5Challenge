@@ -34,8 +34,7 @@
                     <td th:text="${person.lastName}"></td>
                     <td th:text="${person.email}"></td>
                     <td>
-                        <a th:href="@{/update/{id}(id=${person.id})}">Edit</a> -
-                        <a th:href="@{/delete/{id}(id=${person.id})}">Delete</a>
+                        <a th:href="@{/edit/{repo}/{id}(repo=person, id=${person.id})}">Edit</a>
                     </td>
                 </tr>
             </table>
@@ -65,8 +64,8 @@
                     <td th:text="${ed.degree}"/>
                     <td th:text="${ed.gradYear}"/>
                     <td>
-                        <a th:href="@{/edit/{id}(id=${ed.id})}">Edit</a> -
-                        <a th:href="@{/delete/{id}(id=${ed.id})}">Delete</a>
+                        <a th:href="@{/edit/{repo}/{id}(repo=education, id=${ed.id})}">Edit</a> -
+                        <a th:href="@{/delete/{repo}/{id}(repo=education, id=${ed.id})}">Delete</a>
                     </td>
                 </tr>
             </table>
@@ -101,8 +100,8 @@
                     <td th:text="${job.firstDuty}"/>
                     <td th:text="${job.secondDuty}"/>
                     <td>
-                        <a th:href="@{/edit/work/{id}(id=${job.id})}">Edit</a> -
-                        <a th:href="@{/delete/work/{id}(id=${job.id})}">Delete</a>
+                        <a th:href="@{/edit/{repo}/{id}(repo=work, id=${job.id})}">Edit</a> -
+                        <a th:href="@{/delete/{repo}/{id}(repo=work, id=${job.id})}">Delete</a>
                     </td>
                 </tr>
             </table>
@@ -119,7 +118,22 @@
     </div>
     <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
         <div class="card-body">
-            Show skills here
+            <table>
+                <tr>
+                    <th>Skill</th>
+                    <th>Skill level</th>
+                    <th>Edit/Delete</th>
+                </tr>
+                <tr th:each="skill : ${skills}">
+                    <td th:text="${skill.skillName}"/>
+                    <td th:text="${skill.skillLevel}"/>
+
+                    <td>
+                        <a th:href="@{/edit/{repo}/{id}(repo=skill, id=${skill.id})}">Edit</a> -
+                        <a th:href="@{/delete/{repo}/{id}(repo=skill, id=${skill.id})}">Delete</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
