@@ -21,7 +21,10 @@
 
         <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
-                Show ed here
+                <div th:each="ed: ${education}">
+                    <p><span th:text="${ed.getSchoolName()}"/></p>
+                    <p><span th:text="${ed.getDegree()}"/>, <span th:text="${ed.getGradYear()}"/></p>
+                </div>
             </div>
         </div>
     </div>
@@ -35,7 +38,13 @@
         </div>
         <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
-                Show work here
+                <p th:each="job: ${jobs}">
+                <p th:text="${job.getTitle()}"/>
+                <p><span th:text="${job.getCompany()}"/>, <span th:text="${job.getStartDate()}"/>-<span th:text="${job.getEndDate()}"/>
+                </p>
+                <p>-Duty 1: <span th:text="${job.getFirstDuty()}"/></p>
+                <p>-Duty 2: <span th:text="${job.getSecondDuty()}"/></p>
+                </p>
             </div>
         </div>
     </div>
@@ -49,7 +58,9 @@
         </div>
         <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
-                Show skills here
+                <div th:each="jobSkill: ${skills}">
+                    <p><span th:text="${jobSkill.getSkillName()}"/>, <span th:text="${jobSkill.getSkillLevel()}"/></p>
+                </div>
             </div>
         </div>
     </div>

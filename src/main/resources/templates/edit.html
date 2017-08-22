@@ -13,15 +13,15 @@
 
 <!--output-->
 <div class="card">
-    <div class="card-header" role="tab" id="headingOne">
+    <div class="card-header" role="tab" id="headingHead">
         <h5 class="mb-0">
-            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <a data-toggle="collapse" href="#collapseHead" aria-expanded="true" aria-controls="collapseHead">
                 Contact information
             </a>
         </h5>
     </div>
 
-    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapseHead" class="collapse show" role="tabpanel" aria-labelledby="headingHead" data-parent="#accordion">
         <div class="card-body">
             <table>
                 <tr>
@@ -34,7 +34,7 @@
                     <td th:text="${person.lastName}"></td>
                     <td th:text="${person.email}"></td>
                     <td>
-                        <a th:href="@{/update/{id}(id=${person.id})}">Update</a> -
+                        <a th:href="@{/update/{id}(id=${person.id})}">Edit</a> -
                         <a th:href="@{/delete/{id}(id=${person.id})}">Delete</a>
                     </td>
                 </tr>
@@ -53,7 +53,23 @@
 
     <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body">
-            Show ed here
+            <table>
+                <tr>
+                    <th>School</th>
+                    <th>Degree</th>
+                    <th>Graduation year</th>
+                    <th>Edit/Delete</th>
+                </tr>
+                <tr th:each="ed : ${education}">
+                    <td th:text="${ed.schoolName}"/>
+                    <td th:text="${ed.degree}"/>
+                    <td th:text="${ed.gradYear}"/>
+                    <td>
+                        <a th:href="@{/edit/{id}(id=${ed.id})}">Edit</a> -
+                        <a th:href="@{/delete/{id}(id=${ed.id})}">Delete</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
@@ -67,7 +83,29 @@
     </div>
     <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
         <div class="card-body">
-            Show work here
+            <table>
+            <tr>
+                <th>Company</th>
+                <th>Title</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>First duty</th>
+                <th>Second duty</th>
+                <th>Edit/Delete</th>
+            </tr>
+                <tr th:each="job : ${jobs}">
+                    <td th:text="${job.company}"/>
+                    <td th:text="${job.title}"/>
+                    <td th:text="${job.startDate}"/>
+                    <td th:text="${job.endDate}"/>
+                    <td th:text="${job.firstDuty}"/>
+                    <td th:text="${job.secondDuty}"/>
+                    <td>
+                        <a th:href="@{/edit/work/{id}(id=${job.id})}">Edit</a> -
+                        <a th:href="@{/delete/work/{id}(id=${job.id})}">Delete</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
@@ -85,24 +123,7 @@
         </div>
     </div>
 </div>
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Instructor</th>
-        <th>Credits</th>
-        <td>Actions</td>
-    </tr>
-    <tr th:each="course : ${courses}">
-        <td th:text="${course.title}"></td>
-        <td th:text="${course.instructor}"></td>
-        <td th:text="${course.credit}"></td>
-        <td>
-            <a th:href="@{/update/{id}(id=${course.id})}">Update</a> -
-            <a th:href="@{/detail/{id}(id=${course.id})}">Details</a> -
-            <a th:href="@{/delete/{id}(id=${course.id})}">Delete</a>
-        </td>
-    </tr>
-</table>
+
 
 <th:block th:replace="base :: jsscripts"></th:block>
 

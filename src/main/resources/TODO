@@ -1,0 +1,13 @@
+TODO
+
+MUST:
+Add update/delete to person, education, skill
+Add delete to work
+Add name to generate
+Figure out error with person's ID (overwrite doesn't work)
+Limit entries
+
+WANT:
+Single delete method in MainController
+Formatting
+Prettify

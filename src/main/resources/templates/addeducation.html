@@ -16,6 +16,7 @@
     <form action="#" th:action="@{/addeducation}" th:object="${addeducation}" method="post">
         <div class="row justify-content-center">
             <div class="col col-sm-4 form-group">
+                <input type="hidden" th:field="*{id}"/>
                 <label for="school">School</label>
                 <input type="text" class="form-control" th:field="*{schoolName}" id="school" placeholder="College"/>
                 <span th:if="${#fields.hasErrors('schoolName')}" th:errors="*{schoolName}"/>
