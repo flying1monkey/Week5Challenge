@@ -1,13 +1,13 @@
-package edu.berliner.week4challenge.controllers;
+package edu.berliner.week5challenge.controllers;
 
-import edu.berliner.week4challenge.models.Education;
-import edu.berliner.week4challenge.models.Job;
-import edu.berliner.week4challenge.models.Person;
-import edu.berliner.week4challenge.models.Skill;
-import edu.berliner.week4challenge.repositories.EducationRepo;
-import edu.berliner.week4challenge.repositories.JobRepo;
-import edu.berliner.week4challenge.repositories.PersonRepo;
-import edu.berliner.week4challenge.repositories.SkillRepo;
+import edu.berliner.week5challenge.models.Education;
+import edu.berliner.week5challenge.models.Job;
+import edu.berliner.week5challenge.models.Person;
+import edu.berliner.week5challenge.models.Skill;
+import edu.berliner.week5challenge.repositories.EducationRepo;
+import edu.berliner.week5challenge.repositories.JobRepo;
+import edu.berliner.week5challenge.repositories.PersonRepo;
+import edu.berliner.week5challenge.repositories.SkillRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -23,6 +23,10 @@
 
     <div id="collapseHead" class="collapse show" role="tabpanel" aria-labelledby="headingHead" data-parent="#accordion">
         <div class="card-body">
+            <span th:if="${person}==null">
+                You haven't entered your personal information yet!
+            </span>
+            <span th:if="${person}!=null">
             <table>
                 <tr>
                     <th>First name</th>
@@ -38,6 +42,7 @@
                     </td>
                 </tr>
             </table>
+                </span>
         </div>
     </div>
 </div>
