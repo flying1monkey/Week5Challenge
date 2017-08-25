@@ -11,14 +11,18 @@
 <div th:replace="base :: mynav"></div>
 <!--output-->
 <div class="container">
-        <div class="row justify-content-center">
-            <div class="col col-sm-4">
-                <p th:text="${person.firstName}" +" "+ th:text="${person.lastName}"/>
+    <div class="row justify-content-center">
+        <div class="col col-sm-4">
+            <span th:if="${person}==null">You need to enter your name and email for the header. <a
+                    href="addperson.html">Add header</a></span>
+            <span th:if="${person}!=null">
+                <p><span th:text="${person.firstName} + ' ' + ${person.lastName}"/></p>
                 <p th:text="${person.email}"/>
-            </div>
+                </span>
         </div>
+    </div>
 
-    <div class="card">
+    <div class="card border-light">
         <div class="card-header" role="tab" id="headingOne">
             <h5 class="mb-0">
                 <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -27,8 +31,11 @@
             </h5>
         </div>
 
-        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne"
+             data-parent="#accordion">
             <div class="card-body">
+                <div th:if="${noeducation==true}">You must enter at least one item for education. <a
+                        href="addeducation.html">Add education</a></div>
                 <div th:each="ed: ${education}">
                     <p><span th:text="${ed.getSchoolName()}"/></p>
                     <p><span th:text="${ed.getDegree()}"/>, <span th:text="${ed.getGradYear()}"/></p>
@@ -36,36 +43,50 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header" role="tab" id="headingTwo">
-            <h5 class="mb-0">
-                <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Work
-                </a>
-            </h5>
-        </div>
-        <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-            <div class="card-body">
-                <p th:each="job: ${jobs}">
-                <p th:text="${job.getTitle()}"/>
-                <p><span th:text="${job.getCompany()}"/>, <span th:text="${job.getStartDate()}"/>-<span th:text="${job.getEndDate()}"/>
-                </p>
-                <p>-Duty 1: <span th:text="${job.getFirstDuty()}"/></p>
-                <p>-Duty 2: <span th:text="${job.getSecondDuty()}"/></p>
-                </p>
+    <!--Don't show work card if there's no work-->
+    <span th:if="${nowork}==true">
+        <div class="card border-light">
+            <div class="card-header" role="tab" id="headingTwo">
+                <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false"
+                       aria-controls="collapseTwo">
+                        Work
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo"
+                 data-parent="#accordion">
+                <div class="card-body">
+                    <p th:each="job: ${jobs}">
+                    <p th:text="${job.getTitle()}"/>
+                    <p><span th:text="${job.getCompany()}"/>, <span th:text="${job.getStartDate()}"/>-<span
+                            th:text="${job.getEndDate()}"/>
+                    </p>
+                    <p>
+                    <span th:if="${job.firstDuty}">-Duty 1: <span th:text="${job.getFirstDuty()}"/></span>
+                    </p>
+                    <p>
+                    <span th:if="${job.getSecondDuty()}">-Duty 2: <span th:text="${job.getSecondDuty()}"/></span>
+                    </p>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
+    </span>
     <div class="card border-light">
         <div class="card-header" role="tab" id="headingThree">
             <h5 class="mb-0">
-                <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false"
+                   aria-controls="collapseThree">
                     Skills
                 </a>
             </h5>
         </div>
-        <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+        <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree"
+             data-parent="#accordion">
             <div class="card-body">
+                <div th:if="${noskills==true}">You must enter at least one skill. <a href="addskill.html">Add a
+                    skill</a></div>
                 <div th:each="jobSkill: ${skills}">
                     <p><span th:text="${jobSkill.getSkillName()}"/>, <span th:text="${jobSkill.getSkillLevel()}"/></p>
                 </div>

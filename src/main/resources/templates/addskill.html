@@ -13,6 +13,7 @@
 
 <!--input-->
 <div class="container">
+    <span th:if="${toomany}==true">You already have 20 skills.  Any more will not show up unless you delete some.</span>
     <form action="#" th:action="@{/addskill}" th:object="${addskill}" method="post">
         <div class="row justify-content-center">
             <div class="col col-sm-4 form-group">

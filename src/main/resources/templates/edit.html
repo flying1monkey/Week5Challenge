@@ -82,6 +82,7 @@
     </div>
     <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
         <div class="card-body">
+            <span th:if="${message}">You need to delete or modify a skill.  Only 20 are allowed.</span>
             <table>
             <tr>
                 <th>Company</th>

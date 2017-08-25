@@ -114,6 +114,10 @@ public class MainController {
     @GetMapping("/addskill")
     public String addSkill(Model model)
     {
+        if(skillRepo.count()>=20)
+        {
+            model.addAttribute("toomany", true);
+        }
         model.addAttribute("addskill", new Skill());
         return "addskill";
     }
@@ -134,18 +138,32 @@ public class MainController {
     @GetMapping("/generate")
     public String generateResume(Model model)
     {
-        if(!personRepo.findOne((long)1).equals(null))
+        //checks for 0 education items, 1 is required
+        if(edRepo.count()==0)
         {
-            model.addAttribute("person", personRepo.findOne((long) 1));
-            model.addAttribute("jobs", jobRepo.findAll());
-            model.addAttribute("education", edRepo.findAll());
-            model.addAttribute("skills", skillRepo.findAll());
-            return "generate";
+            model.addAttribute("noeducation", true);
         }
-        else
+        //ok to add empty iterable
+        model.addAttribute("education", edRepo.findAll());
+
+        //checks for 0 education items, 1 is required
+        if(skillRepo.count()==0)
         {
-            return "personerror";
+            model.addAttribute("noskills", true);
         }
+        //ok to add empty iterable
+        model.addAttribute("skills", skillRepo.findAll());
+
+        //person object is added, null or not
+        model.addAttribute("person", personRepo.findOne((long) 1));
+
+        //checks for 0 jobs
+        if(jobRepo.count()==0)
+        {
+            model.addAttribute("nowork", true);
+        }
+        model.addAttribute("jobs", jobRepo.findAll());
+        return "generate";
     }
 
     @GetMapping("/edit")
