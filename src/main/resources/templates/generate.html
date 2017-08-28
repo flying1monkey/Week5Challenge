@@ -16,8 +16,8 @@
             <span th:if="${person}==null">You need to enter your name and email for the header. <a
                     href="addperson.html">Add header</a></span>
             <span th:if="${person}!=null">
-                <p><span th:text="${person.firstName} + ' ' + ${person.lastName}"/></p>
-                <p th:text="${person.email}"/>
+                <p><h1 th:text="${person.firstName} + ' ' + ${person.lastName}"/></p>
+                <h2 th:text="${person.email}"/>
                 </span>
         </div>
     </div>
@@ -37,8 +37,9 @@
                 <div th:if="${noeducation==true}">You must enter at least one item for education. <a
                         href="addeducation.html">Add education</a></div>
                 <div th:each="ed: ${education}">
-                    <p><span th:text="${ed.getSchoolName()}"/></p>
+                    <p><i th:text="${ed.getSchoolName()}"/></p>
                     <p><span th:text="${ed.getDegree()}"/>, <span th:text="${ed.getGradYear()}"/></p>
+                    <hr/>
                 </div>
             </div>
         </div>
@@ -58,17 +59,14 @@
                  data-parent="#accordion">
                 <div class="card-body">
                     <p th:each="job: ${jobs}">
-                    <p th:text="${job.getTitle()}"/>
-                    <p><span th:text="${job.getCompany()}"/>, <span th:text="${job.getStartDate()}"/>-<span
+                    <i th:text="${job.getTitle()}"/>
+                    <p><b th:text="${job.getCompany()}"/>, <span th:text="${job.getStartDate()}"/>-<span
                             th:text="${job.getEndDate()}"/>
                     </p>
-                    <p>
-                    <span th:if="${job.firstDuty}!=null">-Duty 1: <span th:text="${job.getFirstDuty()}"/></span>
+                    <p th:text="${job.getFirstDuty()}"/>
+                    <p th:text="${job.getSecondDuty()}"/>
                     </p>
-                    <p>
-                    <span th:if="${job.getSecondDuty()}">-Duty 2: <span th:text="${job.getSecondDuty()}"/></span>
-                    </p>
-                    </p>
+                    <hr/>
                 </div>
             </div>
         </div>

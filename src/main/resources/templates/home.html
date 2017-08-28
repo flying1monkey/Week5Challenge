@@ -9,9 +9,19 @@
 <!--Navigation bar-->
 <div th:replace="base :: mynav"></div>
 
-
-<a href="addperson.html">Add person</a>
-
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-sm-4 justify-center">
+            <h1>Welcome to your Resume Generator!</h1>
+            <p><a class="btn btn-primary" th:href="@{/addperson.html}" role="button">Add your information</a></p>
+            <p><a class="btn btn-primary" th:href="@{/addeducation.html}" role="button">Add your education</a></p>
+            <p> <a class="btn btn-primary" th:href="@{/addwork.html}" role="button">Add your work experience</a></p>
+            <p> <a class="btn btn-primary" th:href="@{/addskill.html}" role="button">Add your skills</a></p>
+            <p> <a class="btn btn-primary" th:href="@{/edit.html}" role="button">Edit or delete data</a></p>
+            <p> <a class="btn btn-primary" th:href="@{/generate.html}" role="button">View your resume</a></p>
+        </div>
+    </div>
+</div>
 <th:block th:replace="base :: jsscripts"></th:block>
 
 </body>
