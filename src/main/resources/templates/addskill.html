@@ -20,7 +20,7 @@
                 <input type="hidden" th:field="*{id}"/>
                 <label for="skill">Skill</label>
                 <input type="text" class="form-control" th:field="*{skillName}" id="skill"
-                       placeholder="Juggling"/>
+                       placeholder="Juggling" autofocus/>
                 <span th:if="${#fields.hasErrors('skillName')}" th:errors="*{skillName}"/>
 
             </div>

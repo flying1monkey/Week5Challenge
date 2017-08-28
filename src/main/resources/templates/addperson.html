@@ -19,13 +19,13 @@
             <div class="col col-sm-4 form-group">
                 <label for="firstName">First name</label>
                 <input type="text" class="form-control" th:field="*{firstName}" id="firstName"
-                       placeholder="First name"/>
+                       placeholder="Given name" autofocus/>
                 <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>
 
             </div>
             <div class="col col-sm-4 form-group">
                 <label for="lastName">Last name</label>
-                <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Last name"/>
+                <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Family name"/>
                 <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>
             </div>
         </div>

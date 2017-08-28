@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col col-sm-4 form-group">
                 <label for="co">Company</label>
-                <input type="text" class="form-control" th:field="*{company}" id="co" placeholder="Company"/>
+                <input type="text" class="form-control" th:field="*{company}" id="co" placeholder="Company" autofocus/>
                 <span th:if="${#fields.hasErrors('company')}" th:errors="*{company}"/>
             </div>
             <div class="col col-sm-4 form-group">
