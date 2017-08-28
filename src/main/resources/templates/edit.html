@@ -12,6 +12,7 @@
 
 
 <!--output-->
+<div class="container">
 <div class="card">
     <div class="card-header" role="tab" id="headingHead">
         <h5 class="mb-0">
@@ -24,16 +25,15 @@
     <div id="collapseHead" class="collapse show" role="tabpanel" aria-labelledby="headingHead" data-parent="#accordion">
         <div class="card-body">
             <span th:if="${person}==null">
-                You haven't entered your personal information yet!
+                You haven't entered your personal information yet! <a th:href="@{addperson.html}">Add it here.</a>
             </span>
-            <span th:if="${person}!=null">
-            <table>
+            <table class="table">
                 <tr>
                     <th>First name</th>
                     <th>Last name</th>
                     <th>Email address</th>
                 </tr>
-                <tr>
+                <tr scope="row">
                     <td th:text="${person.firstName}"></td>
                     <td th:text="${person.lastName}"></td>
                     <td th:text="${person.email}"></td>
@@ -42,7 +42,6 @@
                     </td>
                 </tr>
             </table>
-                </span>
         </div>
     </div>
 </div>
@@ -57,14 +56,18 @@
 
     <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body">
-            <table>
+            <div th:if="${educationmessage}">You may want to delete or modify a school.  Only 10 are allowed on your resume.</div>
+            <div th:if="${noeducation}">
+                You haven't entered any education yet, and you must enter at least one school. <a th:href="@{addeducation.html}">Add it here.</a>
+            </div>
+            <table class="table">
                 <tr>
                     <th>School</th>
                     <th>Degree</th>
                     <th>Graduation year</th>
                     <th>Edit/Delete</th>
                 </tr>
-                <tr th:each="ed : ${education}">
+                <tr th:each="ed : ${education}" scope="row">
                     <td th:text="${ed.schoolName}"/>
                     <td th:text="${ed.degree}"/>
                     <td th:text="${ed.gradYear}"/>
@@ -80,25 +83,29 @@
 <div class="card">
     <div class="card-header" role="tab" id="headingTwo">
         <h5 class="mb-0">
-            <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false"
+               aria-controls="collapseTwo">
                 Work
             </a>
         </h5>
     </div>
     <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
         <div class="card-body">
-            <span th:if="${message}">You need to delete or modify a skill.  Only 20 are allowed.</span>
-            <table>
-            <tr>
-                <th>Company</th>
-                <th>Title</th>
-                <th>Start date</th>
-                <th>End date</th>
-                <th>First duty</th>
-                <th>Second duty</th>
-                <th>Edit/Delete</th>
-            </tr>
-                <tr th:each="job : ${jobs}">
+            <th:block th:if="${jobsmessage}">You may want to delete or modify a job.  Only 10 are allowed on your resume.</th:block>
+            <th:block th:if="${nojob}">
+                You haven't entered any work experience yet. <a th:href="@{addwork.html}">You can add it here.</a>
+            </th:block>
+            <table class="table">
+                <tr>
+                    <th>Company</th>
+                    <th>Title</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>First duty</th>
+                    <th>Second duty</th>
+                    <th>Edit/Delete</th>
+                </tr>
+                <tr th:each="job : ${jobs}" scope="row">
                     <td th:text="${job.company}"/>
                     <td th:text="${job.title}"/>
                     <td th:text="${job.startDate}"/>
@@ -114,23 +121,29 @@
         </div>
     </div>
 </div>
-<div class="card border-light">
+<div class="card">
     <div class="card-header" role="tab" id="headingThree">
         <h5 class="mb-0">
-            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false"
+               aria-controls="collapseThree">
                 Skills
             </a>
         </h5>
     </div>
-    <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+    <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree"
+         data-parent="#accordion">
         <div class="card-body">
-            <table>
+            <span th:if="${skillsmessage}">You may want to delete or modify a skill.  Only 20 are allowed on your resume.</span>
+            <span th:if="${noskill}">
+                You haven't entered any skills yet, and you must enter at least one. <a th:href="@{addskill.html}">Add them here.</a>
+            </span>
+            <table class="table">
                 <tr>
                     <th>Skill</th>
                     <th>Skill level</th>
                     <th>Edit/Delete</th>
                 </tr>
-                <tr th:each="skill : ${skills}">
+                <tr th:each="skill : ${skills}" scope="row">
                     <td th:text="${skill.skillName}"/>
                     <td th:text="${skill.skillLevel}"/>
 
@@ -143,7 +156,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 <th:block th:replace="base :: jsscripts"></th:block>
 

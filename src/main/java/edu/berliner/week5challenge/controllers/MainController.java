@@ -144,7 +144,7 @@ public class MainController {
             model.addAttribute("noeducation", true);
         }
         //ok to add empty iterable
-        model.addAttribute("education", edRepo.findAll());
+        model.addAttribute("education",edRepo.findFirst10ByIdIsNotNull());
 
         //checks for 0 education items, 1 is required
         if(skillRepo.count()==0)
@@ -152,7 +152,7 @@ public class MainController {
             model.addAttribute("noskills", true);
         }
         //ok to add empty iterable
-        model.addAttribute("skills", skillRepo.findAll());
+        model.addAttribute("skills", skillRepo.findFirst20ByIdIsNotNull());
 
         //person object is added, null or not
         model.addAttribute("person", personRepo.findOne((long) 1));
@@ -162,13 +162,37 @@ public class MainController {
         {
             model.addAttribute("nowork", true);
         }
-        model.addAttribute("jobs", jobRepo.findAll());
+        model.addAttribute("jobs", jobRepo.findFirst10ByIdIsNotNull());
         return "generate";
     }
 
     @GetMapping("/edit")
     public String editEntry(Model model)
     {
+        if(jobRepo.count()>10)
+        {
+            model.addAttribute("jobmessage", true);
+        }
+        if(edRepo.count()>10)
+        {
+            model.addAttribute("educationmessage", true);
+        }
+        if(skillRepo.count()>20)
+        {
+            model.addAttribute("skillsmessage", true);
+        }
+        if(jobRepo.count()==0)
+        {
+            model.addAttribute("nojob", true);
+        }
+        if(edRepo.count()==0)
+        {
+            model.addAttribute("noeducation", true);
+        }
+        if(skillRepo.count()==0)
+        {
+            model.addAttribute("noskill", true);
+        }
         model.addAttribute("person", personRepo.findOne((long)1));
         model.addAttribute("jobs", jobRepo.findAll());
         model.addAttribute("education", edRepo.findAll());
